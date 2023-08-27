@@ -5,26 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TODO</title>
     <link rel="stylesheet" href="./style.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
   </head>
   <body>
-    <h1>TODO</h1>
-    <form class="add-form">
-      <input
-        class="text-input no-outline"
-        type="text"
-        placeholder="Add new tasks..."
-      />
-      <button type="submit" class="no-outline">Add</button>
-    </form>
-    <input
-      class="text-input no-outline"
-      type="search"
-      placeholder="Search tasks"
-    />
-
+      <h1>TODO List</h1>
+      <div class="header">
+        <form>
+          <input
+            class="text-input no-outline"
+            type="text"
+            placeholder="Add new tasks..."
+          />
+          <button type="submit" class="no-outline primary-btn">Add</button>
+        </form>
+        <input
+          class="text-input no-outline"
+          type="search"
+          placeholder="Search tasks"
+        />
+        <p>x/y completed</p>
+    </div>
     <div id="list" class="list-container"></div>
-
-    <p>total tasks:</p>
     <script src="./script.js"></script>
   </body>
 </html>

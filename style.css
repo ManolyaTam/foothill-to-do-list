@@ -11,17 +11,15 @@ body {
 
 .text-input {
   padding: 5px;
+  width: 400px;
+  height: 20px;
   border: 1px solid var(--light-blue);
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
-.text-input:focus {
+.with-shadow:focus {
   box-shadow: 0 0 0 2px var(--light-blue);
   transition-duration: 0.1s;
-}
-
-.add-form {
-  margin: 5px;
 }
 
 .no-outline:focus,
@@ -29,7 +27,52 @@ body {
   outline: none;
 }
 
-.list-container {
-  height: 500px;
-  overflow-y: scroll;
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
+  width: 600px;
+  box-sizing: border-box;
+}
+
+.task p {
+  margin: 0;
+  margin-left: 5px;
+}
+.task .left,
+.task .right {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.user-id {
+  padding: 5px;
+  width: 70px;
+  text-align: center;
+}
+
+.with-radius {
+  border-radius: 5px;
+}
+
+.grey-font {
+  color: grey;
+}
+
+.task-button {
+  background-color: transparent;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  margin-left: 5px;
+  height: 30px;
+  font-size: 15px;
+}
+
+.task-button:active {
+  outline: none;
+  background-color: grey;
+  color: white;
 }

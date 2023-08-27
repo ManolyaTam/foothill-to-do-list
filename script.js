@@ -8,9 +8,18 @@ const renderTasks = () => {
     const list = document.getElementById("list")
 
     const list2render = tasks.map(task => `
-     <div>
-     <p>${task.todo}</p>
-     <div>
+    <div  class="task">
+        <div class="left">
+            <input type="checkbox" ${task.completed ? "checked" : ""}>
+            <p>${task.id}.</p>
+            <p>${task.todo}</p>
+        </div>
+        <div class="right">
+        <p class="user-id grey-font with-radius">user#${task.userId}&nbsp;</p>
+        <button class="task-button"><i class=" ph ph-pencil-simple-line"></i></button>
+        <button class="task-button"><i class="ph ph-trash-simple"></i></button>
+        </div>
+        </div>
      `).join("");
     list.innerHTML = list2render;
 }
@@ -18,12 +27,11 @@ const renderTasks = () => {
 window.onload = () => {
     fetchTasks()
         .then(res => {
-            localStorage.setItem("tasks", res)
             return res.json();
         })
         .then((res) => {
             console.log(res);
-            localStorage.setItem("tasks", JSON.stringify(tasks))
+            localStorage.setItem("tasks", JSON.stringify(res.todos))
             tasks = res.todos;
             console.log(tasks)
         })
