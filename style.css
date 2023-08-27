@@ -1,0 +1,35 @@
+body {
+  --light-blue: #007bff40;
+
+  font-family: Ubuntu, Roboto, sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.text-input {
+  padding: 5px;
+  border: 1px solid var(--light-blue);
+  border-radius: 3px;
+}
+
+.text-input:focus {
+  box-shadow: 0 0 0 2px var(--light-blue);
+  transition-duration: 0.1s;
+}
+
+.add-form {
+  margin: 5px;
+}
+
+.no-outline:focus,
+.no-outline:active {
+  outline: none;
+}
+
+.list-container {
+  height: 500px;
+  overflow-y: scroll;
+}
