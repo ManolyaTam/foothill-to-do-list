@@ -9,12 +9,17 @@ body {
   flex-direction: column;
 }
 
-.text-input {
+.txt-input {
   padding: 5px;
   width: 400px;
-  height: 20px;
+  height: 30px;
   border: 1px solid var(--light-blue);
   border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.add-form {
+  margin-bottom: 5px;
 }
 
 .with-shadow:focus {

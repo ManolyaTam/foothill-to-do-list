@@ -10,21 +10,23 @@
   <body>
       <h1>TODO List</h1>
       <div class="header">
-        <form>
+        <form class="add-form">
           <input
-            class="text-input no-outline"
+            class="txt-input no-outline with-shadow"
             type="text"
             placeholder="Add new tasks..."
           />
           <button type="submit" class="no-outline primary-btn">Add</button>
         </form>
-        <input
-          class="text-input no-outline"
-          type="search"
-          placeholder="Search tasks"
-        />
+        <form>
+          <input
+            class="txt-input no-outline with-shadow"
+            type="search"
+            placeholder="Search tasks"
+          />
+        </form>
         <p>x/y completed</p>
-    </div>
+      </div>
     <div id="list" class="list-container"></div>
     <script src="./script.js"></script>
   </body>
