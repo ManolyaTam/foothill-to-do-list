@@ -1,7 +1,9 @@
 body {
   --light-blue: #007bff40;
+  --dark-blue: #007bffb3;
 
   font-family: Ubuntu, Roboto, sans-serif;
+  accent-color: var(--dark-blue);
 
   display: flex;
   align-items: center;
@@ -9,8 +11,15 @@ body {
   flex-direction: column;
 }
 
+.header {
+  width: 600px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
 .txt-input {
-  padding: 5px;
+  font-size: 15px;
+  padding: 7px;
   width: 400px;
   height: 30px;
   border: 1px solid var(--light-blue);
@@ -20,6 +29,25 @@ body {
 
 .add-form {
   margin-bottom: 5px;
+}
+
+.primary-btn {
+  background-color: var(--dark-blue);
+  border: 1px solid var(--light-blue);
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+}
+
+.primary-btn:active,
+.primary-btn:focus {
+  border: 2px solid var(--dark-blue)
+}
+
+
+.task-count {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .with-shadow:focus {
@@ -32,11 +60,15 @@ body {
   outline: none;
 }
 
+.list-container {
+  margin-bottom: 100px;
+}
+
 .task {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid var(--light-blue);
   padding: 10px;
   width: 600px;
   box-sizing: border-box;
@@ -69,7 +101,7 @@ body {
 
 .task-button {
   background-color: transparent;
-  border: 1px solid lightgrey;
+  border: 1px solid var(--light-blue);
   border-radius: 5px;
   margin-left: 5px;
   height: 30px;
@@ -78,6 +110,6 @@ body {
 
 .task-button:active {
   outline: none;
-  background-color: grey;
+  background-color: var(--light-blue);
   color: white;
 }
