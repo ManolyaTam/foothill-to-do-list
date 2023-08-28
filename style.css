@@ -3,16 +3,17 @@ body {
   --dark-blue: #007bffb3;
 
   font-family: Ubuntu, Roboto, sans-serif;
-  accent-color: var(--dark-blue);
 
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  zoom: 120%;
 }
 
 .header {
-  width: 600px;
+  min-width: 600px;
   padding: 10px;
   box-sizing: border-box;
 }
@@ -99,17 +100,25 @@ body {
   color: grey;
 }
 
-.task-button {
+.task-btn {
   background-color: transparent;
-  border: 1px solid var(--light-blue);
-  border-radius: 5px;
-  margin-left: 5px;
+  border: none;
   height: 30px;
   font-size: 15px;
+  margin-left: 5px;
 }
 
-.task-button:active {
+.task-btn:active {
   outline: none;
-  background-color: var(--light-blue);
-  color: white;
+}
+
+.x-btn {
+  color:red;
+  font-weight: bold;
+}
+
+.task input[type=checkbox] {
+  accent-color: var(--dark-blue);
+  width: 14px;
+  aspect-ratio: 1;
 }

@@ -16,8 +16,8 @@ const renderTasks = () => {
         </div>
         <div class="right">
         <p class="user-id grey-font with-radius">user#${task.userId}&nbsp;</p>
-        <button class="task-button"><i class=" ph ph-pencil-simple-line"></i></button>
-        <button class="task-button"><i class="ph ph-trash-simple"></i></button>
+        <button class="task-btn edit-btn"><i class=" ph ph-pencil-simple-line"></i></button>
+        <button class="task-btn x-btn"><i class="ph-bold ph-x"></i></button>
         </div>
         </div>
      `).join("");
