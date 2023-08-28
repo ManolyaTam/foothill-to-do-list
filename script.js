@@ -1,8 +1,4 @@
-const api = "https://dummyjson.com/todos";
 let tasks = [];
-const fetchTasks = () => {
-    return fetch(api);
-};
 
 const renderTasks = () => {
     const list = document.getElementById("list")
@@ -30,10 +26,8 @@ window.onload = () => {
             return res.json();
         })
         .then((res) => {
-            console.log(res);
-            localStorage.setItem("tasks", JSON.stringify(res.todos))
+            localStorage.setItem("tasks", JSON.stringify(res.todos))// should i keep this?
             tasks = res.todos;
-            console.log(tasks)
         })
         .then(() => renderTasks())
 }
