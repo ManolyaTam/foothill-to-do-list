@@ -1,3 +1,6 @@
+import srv from './services.js'
+
+const addForm = document.getElementById('add-form');
 let tasks = [];
 
 const renderTasks = () => {
@@ -20,8 +23,8 @@ const renderTasks = () => {
     list.innerHTML = list2render;
 }
 
-window.onload = () => {
-    fetchTasks()
+const FetchAndRenderTasks = () => {
+    srv.fetchTasks()
         .then(res => {
             return res.json();
         })
@@ -31,3 +34,21 @@ window.onload = () => {
         })
         .then(() => renderTasks())
 }
+
+window.onload = FetchAndRenderTasks();
+
+addForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const newTask = e.target.newTask.value;
+    srv.addTask(newTask, '1')
+    .then(res => res.json())
+    .then(res => {
+        tasks.push(res);
+        console.log(res);
+        renderTasks();
+    });
+    // FetchAndRenderTasks(); 
+    // in reality it should add to the server rather than change on local array
+
+    addForm.reset();
+});

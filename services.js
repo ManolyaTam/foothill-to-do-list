@@ -16,7 +16,4 @@ const addTask = (description, userId) => {
     })
 }
 
-exports = {
-    fetchTasks,
-    addTask
-}
+export default { fetchTasks, addTask }

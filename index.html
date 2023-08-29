@@ -10,11 +10,14 @@
   <body>
       <h1>TODO List</h1>
       <div class="header">
-        <form class="add-form">
+        <form class="add-form" id="add-form" onsubmit="">
           <input
+            id="new-task-inp"
             class="txt-input no-outline with-shadow"
             type="text"
             placeholder="Add a new task..."
+            required
+            name="newTask"
           />
           <button type="submit" class="no-outline primary-btn">Add</button>
         </form>
@@ -30,7 +33,6 @@
         </div>
       </div>
     <div id="list" class="list-container"></div>
-    <script src="./script.js"></script>
-    <script src="./services.js"></script>
+    <script src="./script.js" type="module"></script>
   </body>
 </html>
