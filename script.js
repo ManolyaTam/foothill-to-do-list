@@ -35,18 +35,29 @@ const FetchAndRenderTasks = () => {
         .then(() => renderTasks())
 }
 
-window.onload = FetchAndRenderTasks();
+// renderFromLocalStorage = () => {
+//     tasks = JSON.parse('tasks');
+//     renderTasks();
+// }
+
+window.onload = () => {
+    // if (!localStorage.getItem('tasks')) {
+        FetchAndRenderTasks();
+    // } else {
+    //     renderFromLocalStorage();
+    // }
+}
 
 addForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const newTask = e.target.newTask.value;
     srv.addTask(newTask, '1')
-    .then(res => res.json())
-    .then(res => {
-        tasks.push(res);
-        console.log(res);
-        renderTasks();
-    });
+        .then(res => res.json())
+        .then(res => {
+            tasks.push(res);
+            console.log(res);
+            renderTasks();
+        });
     // FetchAndRenderTasks(); 
     // in reality it should add to the server rather than change on local array
 
