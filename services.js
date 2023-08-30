@@ -2,7 +2,6 @@ const api = "https://dummyjson.com/todos";
 
 /**
  * Fetches tasks from server
- * @returns {Array}
  */
 const fetchTasks = () => {
     return fetch(api);
@@ -31,11 +30,21 @@ const addTask = (description, userId) => {
  * @param {boolean} newState 
  */
 const changeState = (taskId, newState) => {
-    fetch(`${api}/${taskId}`, {
+    return fetch(`${api}/${taskId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ completed: newState })
     })
 }
 
-export default { fetchTasks, addTask, changeState }
+/**
+ * Deletes a task in the server
+ * @param {number} taskId
+ */
+const deleteTask = (taskId) => {
+    return fetch(`${api}/${taskId}`,{
+        method: 'DELETE'
+    })
+}
+
+export default { fetchTasks, addTask, changeState, deleteTask }

@@ -8,9 +8,9 @@ let tasks = [];
 const findMatching = () => {
     const searchParam = searchBar.value.trim().toLowerCase();
     const matchingArr = tasks.filter(task => {
-        let matching = task.todo.trim().toLowerCase().includes(searchParam) 
-        || task.userId.toString().includes(searchParam)
-        || task.id.toString().includes(searchParam);
+        let matching = task.todo.trim().toLowerCase().includes(searchParam)
+            || task.userId.toString().includes(searchParam)
+            || task.id.toString().includes(searchParam);
         return matching;
     })
     return matchingArr
@@ -50,7 +50,7 @@ const fetchFromApi = () => {
         })
 }
 
-window.onload = () => {
+const loadPage = () => {
     if (localStorage.getItem('tasks') && JSON.parse(localStorage.getItem('tasks')).length) {
         tasks = fake.parseTasks();
         renderTasks();
@@ -89,8 +89,8 @@ const addEventListeners = () => {
     })
 
     // edit buttons
-    const EditBtns = document.querySelectorAll('.edit-btn');
-    EditBtns.forEach(btn => {
+    const editBtns = document.querySelectorAll('.edit-btn');
+    editBtns.forEach(btn => {
         btn.addEventListener('click', (event) => {
             const targetTask = event.target.closest('.task');
             const taskId = targetTask.getAttribute('data-id');
@@ -113,4 +113,26 @@ const addEventListeners = () => {
             })
         })
     })
+
+    // delete buttons
+    const deleteBtns = document.querySelectorAll('.x-btn');
+    deleteBtns.forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            const confirmed = confirm(`Are you sure you want to delete this task?\nThis action cannot be undone`)
+            if (confirmed) {
+                const targetTask = event.target.closest('.task');
+                const taskId = targetTask.getAttribute('data-id');
+                const targetIndex = tasks.findIndex(task => task.id == taskId);
+
+
+                renderTasks();
+                srv.deleteTask(taskId)
+                    .then(() => fake.deleteTask(targetIndex))
+                    .then(() => loadPage())
+                    .then(alert('task successfully deleted'));
+            }
+        })
+    })
 }
+
+window.onload = loadPage();

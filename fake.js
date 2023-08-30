@@ -30,10 +30,21 @@ const addTask = (newTask) => {
  * @param {number} taskId 
  * @param {boolean} newState 
  */
-const changeState = (taskId, newState) => {
+const changeState = (taskId, newState) => { // pass index instead of id
     const tmp = parseTasks();
-    tmp[taskId - 1].completed = newState;
+    tmp[taskId - 1].completed = newState; //                TODO
     localStorage.setItem('tasks', JSON.stringify(tmp));
 }
 
-export default { parseTasks, addTask, changeState, storeTasks }
+/**
+ * deletes a task in localStorage
+ * @param {number} taskIndex
+ */
+const deleteTask = (taskIndex) => {
+    const tmp = parseTasks();
+    tmp.splice(taskIndex, 1);
+    localStorage.setItem('tasks', JSON.stringify(tmp));
+
+}
+
+export default { parseTasks, addTask, changeState, storeTasks, deleteTask }
