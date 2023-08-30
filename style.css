@@ -61,6 +61,10 @@ body {
   outline: none;
 }
 
+.no-border {
+  border: none
+}
+
 .list-container {
   margin-bottom: 100px;
 }
@@ -123,10 +127,6 @@ body {
   aspect-ratio: 1;
 }
 
-.task:has(input:checked) .desc {
+.task:has(input:checked) .task-desc {
   text-decoration: line-through;
-}
-
-.no-border {
-  border: none
 }

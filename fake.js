@@ -36,4 +36,4 @@ const changeState = (taskId, newState) => {
     localStorage.setItem('tasks', JSON.stringify(tmp));
 }
 
-export default { parseTasks, addTask, changeState }
+export default { parseTasks, addTask, changeState, storeTasks }
