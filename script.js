@@ -5,6 +5,9 @@ const addForm = document.getElementById('add-form');
 const searchBar = document.getElementById('search-bar');
 let tasks = [];
 
+const totalTasks = () => tasks.length;
+const completedTasks = () => tasks.filter(task => task.completed).length;
+
 const findMatching = () => {
     const searchParam = searchBar.value.trim().toLowerCase();
     const matchingArr = tasks.filter(task => {
@@ -16,9 +19,7 @@ const findMatching = () => {
     return matchingArr
 }
 
-searchBar.addEventListener('input', () => {
-    renderTasks()
-})
+searchBar.addEventListener('input', () => { loadPage() })
 
 const renderTasks = () => {
     const list = document.getElementById("list")
@@ -52,14 +53,23 @@ const fetchFromApi = () => {
 
 const loadPage = () => {
     if (localStorage.getItem('tasks') && JSON.parse(localStorage.getItem('tasks')).length) {
-        tasks = fake.parseTasks();
-        renderTasks();
-        addEventListeners();
+        Promise.resolve(fake.parseTasks())
+            .then(res => {
+                tasks = res;
+                renderTasks()
+            })
+            .then(() => addEventListeners())
+            .then(() => {
+                console.log(`completedTasks: ${completedTasks()} `);
+                console.log(`totalTasks: ${totalTasks()} `);
+                document.getElementById('counts').innerHTML = `${completedTasks()}/${totalTasks()} completed`
+            });
 
     } else {
         fetchFromApi()
             .then(() => renderTasks())
             .then(() => { addEventListeners() })
+            .then(document.getElementById('counts').innerHTML = `${completedTasks()}/${totalTasks()} completed`)
     }
 }
 
@@ -71,7 +81,7 @@ addForm.addEventListener("submit", (e) => {
         .then(res => {
             fake.addTask(res)
             tasks = fake.parseTasks();
-            renderTasks();
+            loadPage();
         });
     addForm.reset();
 });
@@ -85,6 +95,7 @@ const addEventListeners = () => {
             const newState = event.target.checked;
             srv.changeState(taskId, newState);
             fake.changeState(taskId, newState);
+            loadPage();
         })
     })
 
@@ -124,12 +135,9 @@ const addEventListeners = () => {
                 const taskId = targetTask.getAttribute('data-id');
                 const targetIndex = tasks.findIndex(task => task.id == taskId);
 
-
-                renderTasks();
                 srv.deleteTask(taskId)
                     .then(() => fake.deleteTask(targetIndex))
                     .then(() => loadPage())
-                    .then(alert('task successfully deleted'));
             }
         })
     })
