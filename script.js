@@ -24,36 +24,47 @@ const renderTasks = () => {
     list.innerHTML = list2render;
 }
 
-const FetchAndRenderTasks = () => {
-    srv.fetchTasks()
+const fetchFromApi = () => {
+    return srv.fetchTasks()
         .then(res => {
             return res.json();
         })
         .then((res) => {
-            localStorage.setItem("tasks", JSON.stringify(res.todos))// should i keep this?
+            localStorage.setItem("tasks", JSON.stringify(res.todos))
             tasks = res.todos;
-        })
-        .then(() => renderTasks())
-        .then(() => {
-            const checkboxes = document.querySelectorAll('.statusCheckBox');
-
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', (event) => {
-                    const taskId = event.target.getAttribute('data-id');
-                    const newState = event.target.checked;
-                    srv.changeState(taskId, newState);
-                    fake.changeState(taskId, newState);
-                })
-            })
         })
 }
 
 window.onload = () => {
     if (localStorage.getItem('tasks') && JSON.parse(localStorage.getItem('tasks')).length) {
-        console.log(fake.parseTasks());
+        tasks = fake.parseTasks();
+        renderTasks();
+        const checkboxes = document.querySelectorAll('.statusCheckBox');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', (event) => {
+                const taskId = event.target.getAttribute('data-id');
+                const newState = event.target.checked;
+                srv.changeState(taskId, newState);
+                fake.changeState(taskId, newState);
+            })
+        })
     }
     else {
-        FetchAndRenderTasks();
+        fetchFromApi()
+            .then(() => renderTasks())
+            .then(() => {
+                const checkboxes = document.querySelectorAll('.statusCheckBox');
+
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', (event) => {
+                        const taskId = event.target.getAttribute('data-id');
+                        const newState = event.target.checked;
+                        srv.changeState(taskId, newState);
+                        fake.changeState(taskId, newState);
+                    })
+                })
+            })
     }
 }
 
@@ -64,9 +75,8 @@ addForm.addEventListener("submit", (e) => {
         .then(res => res.json())
         .then(res => {
             fake.addTask(res)
+            tasks = fake.parseTasks();
             renderTasks();
         });
-    // FetchAndRenderTasks(); 
-
     addForm.reset();
 });

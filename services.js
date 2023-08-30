@@ -10,8 +10,8 @@ const fetchTasks = () => {
 
 /**
  * Creates a new task on server
- * @param {number} taskId 
- * @param {boolean} newState 
+ * @param {string} description 
+ * @param {number} userId
  */
 const addTask = (description, userId) => {
     return fetch(`${api}/add`, {
