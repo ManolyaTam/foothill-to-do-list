@@ -11,8 +11,7 @@ const renderTasks = () => {
     <div  class="task">
         <div class="left">
             <input data-id=${task.id} class="statusCheckBox" type="checkbox" ${task.completed ? "checked" : ""}>
-            <p>${task.id}.</p>
-            <p>${task.todo}</p>
+            <p>${task.id}. ${task.todo}</p>
         </div>
         <div class="right">
         <p class="user-id grey-font with-radius">user#${task.userId}&nbsp;</p>

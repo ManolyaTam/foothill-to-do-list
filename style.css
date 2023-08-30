@@ -122,3 +122,7 @@ body {
   width: 14px;
   aspect-ratio: 1;
 }
+
+.task:has(input:checked) p:not(.user-id) {
+  text-decoration: line-through;
+}
