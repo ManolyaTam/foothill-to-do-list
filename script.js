@@ -11,7 +11,7 @@ const renderTasks = () => {
     <div  class="task">
         <div class="left">
             <input data-id=${task.id} class="statusCheckBox" type="checkbox" ${task.completed ? "checked" : ""}>
-            <p>${task.id}. ${task.todo}</p>
+            <p>${task.id}.</p><textarea class="desc txt-input no-outline no-border" style="height: fit-content; padding: 1px 6px">${task.todo}</textarea>
         </div>
         <div class="right">
         <p class="user-id grey-font with-radius">user#${task.userId}&nbsp;</p>

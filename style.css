@@ -123,6 +123,10 @@ body {
   aspect-ratio: 1;
 }
 
-.task:has(input:checked) p:not(.user-id) {
+.task:has(input:checked) .desc {
   text-decoration: line-through;
+}
+
+.no-border {
+  border: none
 }
