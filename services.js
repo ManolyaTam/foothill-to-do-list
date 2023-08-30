@@ -1,9 +1,18 @@
 const api = "https://dummyjson.com/todos";
 
+/**
+ * Fetches tasks from server
+ * @returns {Array}
+ */
 const fetchTasks = () => {
     return fetch(api);
 };
 
+/**
+ * Creates a new task on server
+ * @param {number} taskId 
+ * @param {boolean} newState 
+ */
 const addTask = (description, userId) => {
     return fetch(`${api}/add`, {
         method: 'POST',
@@ -17,7 +26,9 @@ const addTask = (description, userId) => {
 }
 
 /**
- * changes the 'completed' attribute value
+ * Changes the 'completed' attribute value in server
+ * @param {number} taskId 
+ * @param {boolean} newState 
  */
 const changeState = (taskId, newState) => {
     fetch(`${api}/${taskId}`, {

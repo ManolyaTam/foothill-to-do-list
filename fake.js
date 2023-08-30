@@ -1,11 +1,24 @@
+/**
+ * Parses tasks from localStorage
+ * @returns {Array}
+ */
 const parseTasks = () => {
     return JSON.parse(localStorage.getItem('tasks'));
 };
 
+/**
+ * Stores tasks in localStorage
+ * @param {Array} arr 
+ */
 const storeTasks = (arr) => {
     localStorage.setItem('tasks', JSON.stringify(arr));
 }
 
+/**
+ * Creates a new task locally
+ * @param {number} taskId 
+ * @param {boolean} newState 
+ */
 const addTask = (newTask) => {
     const tmp = parseTasks();
     tmp.push(newTask);
@@ -13,7 +26,9 @@ const addTask = (newTask) => {
 }
 
 /**
- * changes the 'completed' attribute value
+ * Changes the 'completed' attribute value locally
+ * @param {number} taskId 
+ * @param {boolean} newState 
  */
 const changeState = (taskId, newState) => {
     const tmp = parseTasks();
