@@ -2,12 +2,28 @@ import srv from './services.js'
 import fake from './fake.js'
 
 const addForm = document.getElementById('add-form');
+const searchBar = document.getElementById('search-bar');
 let tasks = [];
+
+const findMatching = () => {
+    const searchParam = searchBar.value.trim().toLowerCase();
+    const matchingArr = tasks.filter(task => {
+        let matching = task.todo.trim().toLowerCase().includes(searchParam) 
+        || task.userId.toString().includes(searchParam)
+        || task.id.toString().includes(searchParam);
+        return matching;
+    })
+    return matchingArr
+}
+
+searchBar.addEventListener('input', () => {
+    renderTasks()
+})
 
 const renderTasks = () => {
     const list = document.getElementById("list")
-
-    const list2render = tasks.map(task => `
+    const matchingArr = findMatching();
+    const list2render = matchingArr.map(task => `
     <div  class="task" data-id=${task.id}>
         <div class="left">
             <input data-id=${task.id} class="statusCheckBox" type="checkbox" ${task.completed ? "checked" : ""}>
@@ -40,11 +56,6 @@ window.onload = () => {
         renderTasks();
         addEventListeners();
 
-        // OR?
-        // Promise.resolve(fake.parseTasks())
-        //     .then(res => tasks = res)
-        //     .then(() => renderTasks())
-        //     .then(() => addEventListeners())
     } else {
         fetchFromApi()
             .then(() => renderTasks())
@@ -88,13 +99,13 @@ const addEventListeners = () => {
             textarea.classList.remove('no-border');
             textarea.focus();
 
-            textarea.addEventListener('keydown', event => {
+            textarea.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter') {
                     const targetIndex = tasks.findIndex(task => task.id == taskId);
                     const newTaskObj = tasks[targetIndex]; // reminder: call by ref
-                    newTaskObj.todo = textarea.value; 
+                    newTaskObj.todo = textarea.value;
                     // there is no api for updating the todo
-                    
+
                     fake.storeTasks(tasks);
                     textarea.readOnly = true;
                     textarea.classList.add('no-border');
