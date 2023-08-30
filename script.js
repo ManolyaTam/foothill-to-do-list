@@ -1,4 +1,5 @@
 import srv from './services.js'
+import fake from './fake.js'
 
 const addForm = document.getElementById('add-form');
 let tasks = [];
@@ -9,7 +10,7 @@ const renderTasks = () => {
     const list2render = tasks.map(task => `
     <div  class="task">
         <div class="left">
-            <input type="checkbox" ${task.completed ? "checked" : ""}>
+            <input data-id=${task.id} class="statusCheckBox" type="checkbox" ${task.completed ? "checked" : ""}>
             <p>${task.id}.</p>
             <p>${task.todo}</p>
         </div>
@@ -33,19 +34,27 @@ const FetchAndRenderTasks = () => {
             tasks = res.todos;
         })
         .then(() => renderTasks())
+        .then(() => {
+            const checkboxes = document.querySelectorAll('.statusCheckBox');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', (event) => {
+                    const taskId = event.target.getAttribute('data-id');
+                    const newState = event.target.checked;
+                    srv.changeState(taskId, newState);
+                    fake.changeState(taskId, newState);
+                })
+            })
+        })
 }
 
-// renderFromLocalStorage = () => {
-//     tasks = JSON.parse('tasks');
-//     renderTasks();
-// }
-
 window.onload = () => {
-    // if (!localStorage.getItem('tasks')) {
+    if (localStorage.getItem('tasks') && JSON.parse(localStorage.getItem('tasks')).length) {
+        console.log(fake.parseTasks());
+    }
+    else {
         FetchAndRenderTasks();
-    // } else {
-    //     renderFromLocalStorage();
-    // }
+    }
 }
 
 addForm.addEventListener("submit", (e) => {
@@ -54,12 +63,10 @@ addForm.addEventListener("submit", (e) => {
     srv.addTask(newTask, '1')
         .then(res => res.json())
         .then(res => {
-            tasks.push(res);
-            console.log(res);
+            fake.addTask(res)
             renderTasks();
         });
     // FetchAndRenderTasks(); 
-    // in reality it should add to the server rather than change on local array
 
     addForm.reset();
 });

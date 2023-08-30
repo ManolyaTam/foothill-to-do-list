@@ -16,4 +16,15 @@ const addTask = (description, userId) => {
     })
 }
 
-export default { fetchTasks, addTask }
+/**
+ * changes the 'completed' attribute value
+ */
+const changeState = (taskId, newState) => {
+    fetch(`${api}/${taskId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ completed: newState })
+    })
+}
+
+export default { fetchTasks, addTask, changeState }
