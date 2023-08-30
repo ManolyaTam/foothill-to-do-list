@@ -27,12 +27,12 @@ const addTask = (newTask) => {
 
 /**
  * Changes the 'completed' attribute value locally
- * @param {number} taskId 
+ * @param {number} taskIndex 
  * @param {boolean} newState 
  */
-const changeState = (taskId, newState) => { // pass index instead of id
+const changeState = (taskIndex, newState) => { // pass index instead of id
     const tmp = parseTasks();
-    tmp[taskId - 1].completed = newState; //                TODO
+    tmp[taskIndex].completed = newState; //                TODO
     localStorage.setItem('tasks', JSON.stringify(tmp));
 }
 

@@ -93,8 +93,9 @@ const addEventListeners = () => {
         checkbox.addEventListener('change', (event) => {
             const taskId = event.target.getAttribute('data-id');
             const newState = event.target.checked;
+            const targetIndex = tasks.findIndex(task => task.id == taskId);
             srv.changeState(taskId, newState);
-            fake.changeState(taskId, newState);
+            fake.changeState(targetIndex, newState);
             loadPage();
         })
     })
